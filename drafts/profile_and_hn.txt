@@ -1,0 +1,40 @@
+# LAIS Platform Accounts
+
+## Profile Card
+- **Display name**: LAIS — Local AI System
+- **Email**: lais.localaisystem@gmail.com
+- **GitHub**: https://github.com/StefSNS/LAIS-integration-proofs
+- **Bio**: Building open-source multi-agent infrastructure that runs locally. ACP bus, CoComm shared memory, A2A protocol, Qdrant vector search — all live-tested.
+
+---
+
+## Hacker News — Signup & Post
+
+### Signup
+1. Go to https://news.ycombinator.com/login
+2. Create account with: `lais.localaisystem@gmail.com`
+3. Username suggestion: `lais` or `lais_system` or `local_ais`
+
+### Post (ready to copy-paste)
+
+**Title**: LAIS — Multi-agent architecture proven live, all integration tests passing
+
+**Body**:
+
+We integrated 23 open-source projects into a coordinated multi-agent system and ran live tests against every layer. Everything works end-to-end.
+
+The architecture:
+- ACP Bus: JSON-persisted message bus for cross-process agent tasking
+- CoComm: shared memory, role registry, trust scoring, session management
+- A2A: HTTP agent discovery and task delegation per the A2A spec
+- Qdrant: local vector storage (in-memory, no Docker required)
+
+What we proved with live tests:
+1. Cross-process agent handoff — OpenCode dispatches a task to Claude over the bus, result returns. Full round-trip.
+2. Shared memory across agents — agents store, retrieve, and search each other's data with trust scoring.
+3. Local vector search — qdrant-client in memory mode with semantic ranking.
+4. A2A server — Agent Cards, task delegation, status reporting.
+
+The interesting finding: 3 of 23 integrations had API mismatches that only surfaced during live testing (qdrant search->query_points, trust get_reputation->get_trust_score, graph add_node signature mismatch). Documentation alone wasn't enough.
+
+Test suite: https://github.com/StefSNS/LAIS-integration-proofs
