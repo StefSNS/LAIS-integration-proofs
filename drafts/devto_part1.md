@@ -1,8 +1,8 @@
 ---
 title: "Building a Multi-Agent System from 23 Open-Source Projects — What Worked, What Broke"
-published: false
+published: true
 description: "Part 1 of a series on integrating 23 projects into a coordinated multi-agent architecture with live-tested integration proofs."
-tags: [ai, agents, python, opensource, architecture]
+tags: [ai, agents, python, architecture]
 series: "Building LAIS"
 ---
 
