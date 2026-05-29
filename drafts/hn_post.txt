@@ -1,0 +1,33 @@
+Title: LAIS — A multi-agent architecture proven live, with all integration tests passing
+
+We integrated 23 open-source projects into a coordinated multi-agent system and ran live tests against every layer. Everything works end-to-end.
+
+The architecture:
+
+- ACP Bus: JSON-persisted message bus for cross-process agent tasking
+- CoComm: shared memory, role registry, trust scoring, session management
+- A2A: HTTP agent discovery and task delegation per the A2A spec
+- Qdrant: local vector storage (in-memory, no Docker required)
+- OpenRouter routing with Owl Alpha (1M context) as the primary model
+
+What we proved:
+
+1. Cross-process agent handoff works — OpenCode dispatches a task → Claude agent picks it up via bus polling → processes via OpenRouter → returns the result. Full round-trip confirmed.
+
+2. Shared memory works across agents — agents store, retrieve, and search each other's data. Five agents registered with different roles in the trust system.
+
+3. Local vector search works — qdrant-client in memory mode with semantic search returning ranked results. No cloud dependency.
+
+4. A2A HTTP server serves Agent Cards, accepts task delegation, and reports status — standards-compatible.
+
+The interesting finding wasn't that the integrations work — it was the API drift we caught. Three of the 23 integrations had method signatures that didn't match their documented APIs when tested live:
+
+- qdrant-client 1.x uses query_points() not search()
+- CoComm TrustManager uses get_trust_score() not get_reputation()
+- GraphEvolutionEngine.add_node() requires capabilities list, not a knowledge dict
+
+These only surfaced because we ran live tests against real running components rather than relying on documentation or unit tests.
+
+The full test suite is open source: https://github.com/StefSNS/LAIS-integration-proofs
+
+Happy to answer technical questions about the architecture or protocol design.

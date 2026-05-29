@@ -1,0 +1,29 @@
+Title: LAIS — a multi-agent system that runs fully local, with proof
+
+I've been working on LAIS (Local AI System) — a multi-agent architecture designed to run entirely on your hardware with zero cloud dependency. All integration tests are live and passing.
+
+What it does:
+
+Four agents communicate over three protocols, sharing memory and routing tasks — without a centralized server.
+
+The local-first stack:
+
+- Qdrant vector storage runs in-memory via qdrant-client (no Docker, no cloud, no pip install extras)
+- ACP bus persists to a local JSON file — no database, no server process
+- All agents register and discover each other locally
+- OpenRouter as the model backend so you can swap between providers without changing infrastructure
+
+Test results (all real, all live):
+
+- Agent A sends a task to Agent B over the bus → B processes it → returns the result over the same bus
+- Agents store data in shared memory → other agents retrieve it by category and agent
+- Vector search returns semantically ranked results from locally stored embeddings
+- The A2A HTTP server exposes an Agent Card showing 9 registered agents
+
+The whole thing runs on a single machine. No Docker. No cloud API except the model inference itself (and even that can go local with llama.cpp).
+
+Why this matters for local AI:
+
+Most multi-agent demos require cloud infrastructure — a hosted vector database, a message queue, serverless functions. This stack proves you can have multi-agent coordination on a laptop.
+
+Code: https://github.com/StefSNS/LAIS-integration-proofs

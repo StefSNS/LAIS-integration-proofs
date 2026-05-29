@@ -1,0 +1,25 @@
+Title: Building a multi-agent system from 23 open-source projects — what worked, what broke
+
+A series about integrating 23 projects into a coordinated multi-agent architecture, with live tests proving every layer.
+
+Part 1: The Single-Agent Ceiling
+==================================
+One LLM, one context window, one shot. That's the constraint every AI tool operates under today. I'll show how agent handoff over the ACP bus breaks through that ceiling — and what happened when we tested it live.
+
+Part 2: Shared Memory for AI Agents
+====================================
+Agents need to remember what other agents did. CoComm gives them persistent shared memory with trust scoring and role-based access. I'll walk through the implementation and the API drift we caught in testing.
+
+Part 3: Vector Search Without Docker
+=====================================
+Qdrant's local mode means semantic search runs in-process with no infrastructure. I'll show the embedding pipeline, the search flow, and the qdrant-client API changes that broke our first test.
+
+Part 4: Standards for Agent Communication
+==========================================
+ACP (file-based) and A2A (HTTP) — two protocols for agent communication at different scales. When to use each, and how they complement each other.
+
+Part 5: What Live Testing Taught Us
+=====================================
+Three integrations had API mismatches that only surfaced when we ran real tests against real components. A retrospective on why live testing matters for multi-agent systems.
+
+All code: https://github.com/StefSNS/LAIS-integration-proofs

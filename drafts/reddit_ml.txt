@@ -1,0 +1,31 @@
+Title: ACP + A2A — open protocols for multi-agent communication, live-tested
+
+Two trends in AI are converging: multi-agent systems and the need for standardized communication between agents. Most frameworks today (CrewAI, AutoGen, LangGraph) use proprietary protocols that don't interoperate.
+
+We built and live-tested two open protocols for agent communication:
+
+ACP Bus (Agent Communication Protocol)
+- File-based message bus using JSON persistence
+- Cross-process: agents in different processes communicate via shared file reads
+- Message types: task, result, ack, with TTL and status tracking
+- Pattern: polling with _sync() to pick up messages from other processes
+
+A2A (Agent-to-Agent HTTP)
+- Implements the A2A v1.0 specification
+- GET /.well-known/agent-card for Agent Discovery
+- POST /a2a/tasks for task delegation
+- GET /a2a/tasks/{id} for task status
+
+Why protocols matter:
+
+Right now, building a multi-agent system means picking a framework and being locked in. ACP and A2A are framework-agnostic — any tool that reads/writes JSON can participate. The ACP bus in particular requires zero infrastructure: no message broker, no database, no server.
+
+What we confirmed live:
+
+1. Cross-process task round-trip: 5-step handoff (send → sync → receive → process → result) works reliably
+2. A2A server serves 9 registered agents with capability discovery
+3. Both protocols operate alongside CoComm shared memory for persistent state
+
+Test suite: https://github.com/StefSNS/LAIS-integration-proofs
+
+Would be interested in discussion about protocol design decisions — polling vs push for cross-process sync, message lifecycle management, and whether the A2A spec needs extensions for result streaming.
