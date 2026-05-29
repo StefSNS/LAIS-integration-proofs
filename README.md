@@ -73,6 +73,10 @@ python tests/test_a2a.py
 for t in tests/test_*.py; do python "$t"; done
 ```
 
+## License
+
+© 2026 LAIS Contributors — Apache 2.0. See [LICENSE](LICENSE).
+
 ## Background
 
 These tests validate the integration of 23 researched projects into LAIS across three implementation phases:
